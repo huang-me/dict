@@ -1,4 +1,5 @@
 *.o
+*.png
 *.o.d
 cpy.txt
 ref.txt
