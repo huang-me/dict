@@ -8,3 +8,5 @@ bench_ref.txt
 cpy_data.csv
 ref_data.csv
 test_common
+output
+perf.data
