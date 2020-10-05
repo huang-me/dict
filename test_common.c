@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <unistd.h>
 
 #include "bench.c"
 #include "bloom.h"
@@ -97,11 +98,15 @@ int main(int argc, char **argv)
     fclose(fp);
     printf("ternary_tree, loaded %d words in %.6f sec\n", idx, t2 - t1);
 
-    if (argc == 3 && strcmp(argv[1], "--bench") == 0) {
-        int stat = bench_test(root, BENCH_TEST_FILE, LMAX);
-        tst_free(root);
-        free(pool);
-        return stat;
+    int c, stat;
+    while ((c = getopt(argc, argv, "b")) != -1) {
+        switch (c) {
+        case 'b':
+            stat = bench_test(root, BENCH_TEST_FILE, LMAX);
+            tst_free(root);
+            free(pool);
+            return stat;
+        }
     }
 
     FILE *output;
