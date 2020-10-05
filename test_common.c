@@ -99,12 +99,18 @@ int main(int argc, char **argv)
     printf("ternary_tree, loaded %d words in %.6f sec\n", idx, t2 - t1);
 
     int c, stat;
-    while ((c = getopt(argc, argv, "b")) != -1) {
+    while ((c = getopt(argc, argv, "bf")) != -1) {
         switch (c) {
-        case 'b':
+        case 'b': /* "-b" do bench test */
             stat = bench_test(root, BENCH_TEST_FILE, LMAX);
             tst_free(root);
             free(pool);
+            return stat;
+        case 'f': /* "-f" for bloom and bench test */
+            stat = bench_test_bloom(root, BENCH_TEST_FILE, LMAX, bloom);
+            tst_free(root);
+            free(pool);
+            bloom_free(bloom);
             return stat;
         }
     }
