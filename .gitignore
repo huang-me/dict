@@ -10,3 +10,4 @@ ref_data.csv
 test_common
 output
 perf.*
+*.gp
